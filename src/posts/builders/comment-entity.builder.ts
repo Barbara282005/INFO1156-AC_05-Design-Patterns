@@ -19,6 +19,16 @@ export class CommentEntityBuilder {
         this.moderationState = state
         return this
     }
+    
+    withLanguage(language: string): this {
+        this.language = language
+        return this
+    }
+
+    withIsPinned(isPinned: boolean): this {
+        this.isPinned = isPinned
+        return this
+    }
 
     withMetadata(metadata: Record<string, unknown>): this {
         this.metadata = metadata
@@ -27,6 +37,7 @@ export class CommentEntityBuilder {
 
     build(): CommentEntity {
         const { comment } = this
+        // Lógica de negocio encapsulada al construir la entidad
         const sentimentScore = comment.content.length > 80 ? 70 : 45
         const isPinned = this.isPinned || comment.content.length % 2 === 0
 
